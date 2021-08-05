@@ -1,11 +1,11 @@
 //Link: https://leetcode.com/problems/longest-substring-without-repeating-characters/
-package main
+package questions
 
 import (
 	"fmt"
 )
 
-func lengthOfLongestSubstring(s string) int {
+func LengthOfLongestSubstring(s string) int {
 
 	var longestLength int
 	var count int
@@ -33,10 +33,5 @@ func lengthOfLongestSubstring(s string) int {
 		}
 	}
 	return longestLength
-
-}
-
-func main() {
-	fmt.Printf("Longest length is %v", lengthOfLongestSubstring("abcabcbb"))
 
 }
