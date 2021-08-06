@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/cody6750/leetCode/src/questions"
+	questions "github.com/cody6750/leetCode/src/questions"
 )
 
 func main() {
