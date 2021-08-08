@@ -11,12 +11,12 @@ type Queue struct {
 }
 
 //Enqueue ..
-func (q Queue) Enqueue(input int) {
+func (q *Queue) Enqueue(input int) {
 	q.list = append(q.list, input)
 }
 
 //Deqeue ...
-func (q Queue) Deqeue() int {
+func (q *Queue) Deqeue() int {
 	if len(q.list) == 0 {
 		log.Fatalf("Unable to deqeueu, queue is empty")
 	}
@@ -31,12 +31,12 @@ type Stack struct {
 }
 
 //Push ..
-func (s Stack) Push(input int) {
+func (s *Stack) Push(input int) {
 	s.list = append(s.list, input)
 }
 
 //Pop ..
-func (s Stack) Pop() int {
+func (s *Stack) Pop() int {
 	if len(s.list) == 0 {
 		log.Fatalf("Unable to Pop, stack is empty")
 	}
