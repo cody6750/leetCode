@@ -42,6 +42,7 @@ type Node struct {
 	Left  *Node
 	Right *Node
 	Value int
+	Depth int
 }
 
 func (t *Tree) Insert(v int) {
@@ -55,11 +56,11 @@ func (t *Tree) Insert(v int) {
 
 func (n *Node) Insert(v int) {
 	if n.Left == nil && n.Value >= v {
-		n.Left = &Node{Value: v}
+		n.Left = &Node{Value: v, Depth: n.Depth + 1}
 		return
 	}
 	if n.Right == nil && n.Value < v {
-		n.Right = &Node{Value: v}
+		n.Right = &Node{Value: v, Depth: n.Depth + 1}
 		return
 	}
 	if n.Value >= v {
@@ -117,11 +118,11 @@ func (n *Node) Max() *Node {
 		if curr.Value > Max.Value {
 			Max = curr
 		}
-		if curr.Left != nil {
-			stack = append(stack, curr.Left)
-		}
 		if curr.Right != nil {
 			stack = append(stack, curr.Right)
+		}
+		if curr.Left != nil {
+			stack = append(stack, curr.Left)
 		}
 	}
 
@@ -141,11 +142,11 @@ func (n *Node) Min() *Node {
 		if curr.Value < min.Value {
 			min = curr
 		}
-		if curr.Right != nil {
-			stack = append(stack, curr.Right)
-		}
 		if curr.Left != nil {
 			stack = append(stack, curr.Left)
+		}
+		if curr.Right != nil {
+			stack = append(stack, curr.Right)
 		}
 	}
 	return min
@@ -306,11 +307,80 @@ func (n *Node) PostOrderTraverse() {
 	log.Print(n.Value)
 }
 
-// Item with the min value
-func MinDepth() {}
+// Item with the max value
+func (n *Node) MaxDepth() int {
+	var max int
+	var q []*Node
+
+	if n == nil {
+		return -1
+	}
+	if n.Left != nil {
+		q = append(q, n.Left)
+	}
+	if n.Right != nil {
+		q = append(q, n.Right)
+	}
+
+	for len(q) != 0 {
+		curr := q[len(q)-1]
+		q = q[:len(q)-1]
+		if curr.Left == nil && curr.Right == nil {
+			if curr.Depth > max {
+				log.Print(curr)
+				max = curr.Depth
+			}
+		}
+		if curr.Left != nil {
+			q = append(q, curr.Left)
+		}
+		if curr.Right != nil {
+			q = append(q, curr.Right)
+		}
+	}
+
+	return max
+}
 
 // Item with the max value
-func MaxDepth() {}
+func (n *Node) MinDepth() int {
+	var min int
+	var q []*Node
+
+	if n == nil {
+		return -1
+	}
+	if n.Left != nil {
+		q = append(q, n.Left)
+	}
+	if n.Right != nil {
+		q = append(q, n.Right)
+	}
+
+	for len(q) != 0 {
+		curr := q[0]
+		q = q[1:]
+		if curr.Left == nil && curr.Right == nil {
+			log.Print(curr)
+			return curr.Depth
+		}
+		if curr.Left != nil {
+			q = append(q, curr.Left)
+		}
+		if curr.Right != nil {
+			q = append(q, curr.Right)
+		}
+	}
+
+	return min
+}
+
+// TODO without memorizing
+func (n *Node) MinDepthRecursive() int {
+	var minimum int
+
+	return minimum
+}
 
 func testTree() {
 	T := initTree()

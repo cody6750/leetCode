@@ -88,3 +88,45 @@ func TestNode_InOrderTraverse(t *testing.T) {
 		})
 	}
 }
+
+func TestNode_MinDepth(t *testing.T) {
+	tests := []struct {
+		name string
+		n    *Node
+		want int
+	}{
+		{
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tree := initTree()
+			stringify(tree.root, 0)
+			if got := tree.root.MinDepth(); got != tt.want {
+				t.Errorf("Node.MinDepth() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNode_MaxDepth(t *testing.T) {
+	tests := []struct {
+		name string
+		n    *Node
+		want int
+	}{
+		{
+			want: 4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tree := initTree()
+			stringify(tree.root, 0)
+			if got := tree.root.MaxDepth(); got != tt.want {
+				t.Errorf("Node.MaxDepth() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

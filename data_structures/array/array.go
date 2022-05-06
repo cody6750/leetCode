@@ -18,5 +18,4 @@ func initArray() {
 	//2. Creating array using shorthand declaration
 	b := [5]int{1, 2, 3, 4, 5}
 	log.Print(b)
-
 }

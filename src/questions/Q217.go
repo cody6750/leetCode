@@ -1,11 +1,11 @@
 func containsDuplicate(nums []int) bool {
-	exist := map[int]struct{}{}
+	duplicates := map[int]struct{}{}
+	sort.Ints(nums)
 	for _, num := range nums {
-		if _, exists := exist[num]; exists {
+		if _, exist := duplicates[num]; exist {
 			return true
-		} else {
-			exist[num] = struct{}{}
 		}
+		duplicates[num] = struct{}{}
 	}
 	return false
 }

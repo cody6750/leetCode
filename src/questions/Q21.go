@@ -1,37 +1,51 @@
-package questions
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import (
+	"fmt"
+)
 
-// [ 1 2 3] [ 3 2 1]
-// [1 1 2 2 3 3]
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	var finalListNode ListNode
-	if l1 == nil && l2 != nil {
-		return l2
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+	if list1 == nil && list2 == nil {
+		return nil
 	}
-	if l2 == nil && l1 != nil {
-		return l2
-	}
-
-	for l1 != nil || l2 != nil {
-		if l1 == nil && l2 != nil {
-			finalListNode.Next = l2
-			l2 = l2.Next
-		} else if l1 != nil && l2 == nil {
-			finalListNode.Next = l1
-			l1 = l1.Next
-		} else if l1.Val <= l2.Val {
-			finalListNode.Next = l2
-			l2 = l2.Next
-		} else if l1.Val > l2.Val {
-			finalListNode.Next = l1
-			l1 = l2.Next
+	final := &ListNode{}
+	head := final
+	for list1 != nil || list2 != nil {
+		if list1 != nil && list2 != nil {
+			if list1.Val <= list2.Val {
+				final.Val = list1.Val
+				list1 = list1.Next
+			} else {
+				final.Val = list2.Val
+				list2 = list2.Next
+			}
+		} else if list1 != nil {
+			final.Val = list1.Val
+			list1 = list1.Next
+		} else if list2 != nil {
+			final.Val = list2.Val
+			list2 = list2.Next
 		}
+		fmt.Print(final)
+		if list1 == nil && list2 == nil {
+			break
+		}
+		final.Next = &ListNode{}
+		final = final.Next
 	}
 
-	return &finalListNode
-
+	return head
 }
+
+// [] []
+// [1] []
+// [] [2]
+// [1 1 1 ] [2 2 3 ]
+// [-1]  [5]
+// [5] [-1]
